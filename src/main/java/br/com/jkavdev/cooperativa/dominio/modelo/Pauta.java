@@ -14,12 +14,12 @@ import lombok.Setter;
 @Entity
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Pauta {
-	
+
 	@EqualsAndHashCode.Include
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+
 	private String descricao;
 
 }

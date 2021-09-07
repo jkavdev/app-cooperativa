@@ -1,4 +1,4 @@
-package br.com.jkavdev.cooperativa.api.controller;
+package br.com.jkavdev.cooperativa.api.model;
 
 import lombok.Getter;
 import lombok.Setter;
