@@ -1,6 +1,7 @@
 package br.com.jkavdev.cooperativa.api.controller;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
@@ -37,7 +38,8 @@ public class PautaController {
 
 	@GetMapping
 	public List<PautaModel> listar() {
-		return pautaRepository.findAll().stream().map(p -> mapper.map(p, PautaModel.class)).toList();
+		return pautaRepository.findAll().stream().map(p -> mapper.map(p, PautaModel.class))
+				.collect(Collectors.toList());
 	}
 
 }

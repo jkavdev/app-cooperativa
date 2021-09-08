@@ -52,6 +52,7 @@ public class Sessao {
 		Voto votacao = new Voto();
 		votacao.setCpf(cpf);
 		votacao.setSessao(this);
+		votacao.setVoto(voto);
 		getVotos().add(votacao);
 		return votacao;
 	}

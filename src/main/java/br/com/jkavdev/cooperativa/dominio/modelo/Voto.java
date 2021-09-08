@@ -21,7 +21,7 @@ public class Voto {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	private boolean voto;
+	private Boolean voto;
 
 	private String cpf;
 
