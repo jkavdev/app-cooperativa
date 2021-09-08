@@ -26,6 +26,11 @@ public class SessaoService {
 				.orElseThrow(() -> new EntidadeNaoEncontradaException("sessao nao encontrada"));
 	}
 
+	public Sessao resumo(Long sessaoId) {
+		return sessaoRepository.resumo(sessaoId)
+				.orElseThrow(() -> new EntidadeNaoEncontradaException("sessao nao encontrada"));
+	}
+
 	@Transactional
 	public Sessao abrir(Long pautaId, Long duracao) {
 		Pauta pauta = pautaService.buscar(pautaId);
@@ -45,7 +50,7 @@ public class SessaoService {
 	public Voto votar(Long sessaoId, String cpf, boolean voto) {
 		Sessao sessao = buscar(sessaoId);
 
-		return sessao.realizarVoto(cpf, voto);
+		return sessao.votar(cpf, voto);
 	}
 
 }

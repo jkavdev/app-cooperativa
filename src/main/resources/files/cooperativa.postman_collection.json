@@ -74,11 +74,11 @@
 				{
 					"name": "sessoes - votar",
 					"request": {
-						"method": "PUT",
+						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"duracao\":30\r\n}",
+							"raw": "{\r\n    \"cpf\":\"14878744057\", \r\n    \"voto\": false\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -126,6 +126,39 @@
 								"pautas",
 								"1",
 								"sessoes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "sessoes - resumo",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"duracao\":30\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/pautas/1/sessoes/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"pautas",
+								"1",
+								"sessoes",
+								"1"
 							]
 						}
 					},

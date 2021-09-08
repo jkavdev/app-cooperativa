@@ -19,8 +19,8 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@Entity
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@Entity
 public class Sessao {
 
 	@EqualsAndHashCode.Include
@@ -38,7 +38,7 @@ public class Sessao {
 	@OneToMany(mappedBy = "sessao", cascade = CascadeType.ALL)
 	private List<Voto> votos = new ArrayList<>();
 
-	public Voto realizarVoto(String cpf, boolean voto) {
+	public Voto votar(String cpf, boolean voto) {
 		boolean sessaoEncerrada = OffsetDateTime.now().isAfter(getFim());
 		if (sessaoEncerrada) {
 			throw new NegocioException("sessao encerrada");

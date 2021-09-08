@@ -11,7 +11,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -41,7 +40,7 @@ public class SessaoController {
 		return mapper.map(sessaoService.abrir(pautaId, input.getDuracao()), SessaoModel.class);
 	}
 
-	@PutMapping("/{sessaoId}/votar")
+	@PostMapping("/{sessaoId}/votar")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void abrir(@PathVariable Long sessaoId, @RequestBody @Valid VotoInput input) {
 		sessaoService.votar(sessaoId, input.getCpf(), input.getVoto());
@@ -49,7 +48,7 @@ public class SessaoController {
 
 	@GetMapping("/{sessaoId}")
 	public SessaoModel resumo(@PathVariable Long sessaoId) {
-		Sessao sessao = sessaoService.buscar(sessaoId);
+		Sessao sessao = sessaoService.resumo(sessaoId);
 
 		SessaoModel model = mapper.map(sessao, SessaoModel.class);
 		Map<Boolean, Long> votos = sessao.getVotos().stream()

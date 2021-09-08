@@ -12,8 +12,8 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@Entity
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@Entity
 public class Voto {
 
 	@EqualsAndHashCode.Include
