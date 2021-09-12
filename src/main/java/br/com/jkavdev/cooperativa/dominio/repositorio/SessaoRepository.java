@@ -25,4 +25,4 @@ public interface SessaoRepository extends JpaRepository<Sessao, Long> {
 			+ "GROUP BY s.id ")
 	public List<SessaoModel> sessoesEncerradas();
 
-}
+} 

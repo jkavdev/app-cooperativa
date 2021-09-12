@@ -21,7 +21,7 @@ public class SessaoVerificadorService {
 	@Autowired
 	private AmqpTemplate amqpTemplate;
 
-	@Scheduled(fixedRate = 5000L)
+	@Scheduled(fixedRate = 15000L)
 	public void verificarSessoes() {
 		List<SessaoModel> sessoes = this.sessaoRepository.sessoesEncerradas();
 		sessoes.stream().forEach(s -> {

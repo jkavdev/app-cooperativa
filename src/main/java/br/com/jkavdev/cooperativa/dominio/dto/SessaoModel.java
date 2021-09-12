@@ -29,8 +29,8 @@ public class SessaoModel implements Serializable {
 	@Override
 	public String toString() {
 		return "Pauta " + descricao 
-				+ ", iniciada as " + inicio.getHour() 
-				+ ", encerrada as " + fim.getHour() 
+				+ ", iniciada as " + inicio 
+				+ ", encerrada as " + fim 
 				+ " com " + qtdeVotos + " votos";
 	}
 
