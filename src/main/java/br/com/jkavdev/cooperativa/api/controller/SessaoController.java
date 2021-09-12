@@ -1,8 +1,11 @@
 package br.com.jkavdev.cooperativa.api.controller;
 
+import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.validation.Valid;
 
 import org.modelmapper.ModelMapper;
@@ -22,11 +25,18 @@ import br.com.jkavdev.cooperativa.api.model.SessaoModel;
 import br.com.jkavdev.cooperativa.api.model.VotoModel;
 import br.com.jkavdev.cooperativa.dominio.modelo.Sessao;
 import br.com.jkavdev.cooperativa.dominio.modelo.Voto;
+import br.com.jkavdev.cooperativa.dominio.repositorio.SessaoRepository;
 import br.com.jkavdev.cooperativa.dominio.service.SessaoService;
 
 @RestController
 @RequestMapping("/pautas/{pautaId}/sessoes")
 public class SessaoController {
+
+	@PersistenceContext
+	private EntityManager entityManager;
+
+	@Autowired
+	private SessaoRepository sessaoRepository;
 
 	@Autowired
 	private SessaoService sessaoService;
@@ -42,7 +52,7 @@ public class SessaoController {
 
 	@PostMapping("/{sessaoId}/votar")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
-	public void abrir(@PathVariable Long sessaoId, @RequestBody @Valid VotoInput input) {
+	public void votar(@PathVariable Long sessaoId, @RequestBody @Valid VotoInput input) {
 		sessaoService.votar(sessaoId, input.getCpf(), input.getVoto());
 	}
 
@@ -61,6 +71,11 @@ public class SessaoController {
 		model.setVotos(voto);
 
 		return model;
+	}
+
+	@GetMapping
+	public List<br.com.jkavdev.cooperativa.dominio.dto.SessaoModel> sessoes() {
+		return sessaoRepository.sessoesEncerradas();
 	}
 
 }

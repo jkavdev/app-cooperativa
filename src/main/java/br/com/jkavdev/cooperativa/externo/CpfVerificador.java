@@ -20,15 +20,16 @@ public class CpfVerificador {
 	public StatusUsuario getStatus(String cpf) {
 		try {
 			String URL = urlVerificador + cpf;
-			Status resp = restTemplate.getForObject(URL, Status.class);
+			StatusModel resp = restTemplate.getForObject(URL, StatusModel.class);
 			return resp.getStatus();
 		} catch (HttpClientErrorException e) {
 			if (404 == e.getRawStatusCode()) {
 				throw new NegocioException("cpf invalido");
 			}
-
+		} catch (Exception e) {
 			throw new NegocioException("erro ao consultar cpf, " + e.getMessage());
 		}
+		return null;
 	}
 
 }

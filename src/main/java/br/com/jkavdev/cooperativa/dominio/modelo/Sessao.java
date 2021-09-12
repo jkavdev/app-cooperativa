@@ -11,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Transient;
 
 import br.com.jkavdev.cooperativa.dominio.exception.NegocioException;
 import lombok.EqualsAndHashCode;
@@ -39,8 +40,7 @@ public class Sessao {
 	private List<Voto> votos = new ArrayList<>();
 
 	public Voto votar(String cpf, boolean voto) {
-		boolean sessaoEncerrada = OffsetDateTime.now().isAfter(getFim());
-		if (sessaoEncerrada) {
+		if (isSessaoEncerrada()) {
 			throw new NegocioException("sessao encerrada");
 		}
 
@@ -55,6 +55,11 @@ public class Sessao {
 		votacao.setVoto(voto);
 		getVotos().add(votacao);
 		return votacao;
+	}
+
+	@Transient
+	public boolean isSessaoEncerrada() {
+		return OffsetDateTime.now().isAfter(getFim());
 	}
 
 }

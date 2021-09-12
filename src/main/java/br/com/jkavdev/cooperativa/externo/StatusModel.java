@@ -5,7 +5,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class Status {
+public class StatusModel {
 
 	private StatusUsuario status;
 
