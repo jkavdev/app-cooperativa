@@ -5,7 +5,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -38,6 +41,10 @@ public class Sessao {
 
 	@OneToMany(mappedBy = "sessao", cascade = CascadeType.ALL)
 	private List<Voto> votos = new ArrayList<>();
+	
+	@Column(nullable = true)
+	@Enumerated(EnumType.STRING)
+	private SessaoStatus status;
 
 	public Voto votar(String cpf, boolean voto) {
 		if (isSessaoEncerrada()) {

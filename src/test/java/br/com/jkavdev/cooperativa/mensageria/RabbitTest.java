@@ -35,9 +35,9 @@ public class RabbitTest {
 	@Test
 	void rabbitTest() throws InterruptedException {
 		// Give the test time to send some messages.
-		Thread.sleep(10000);
+		Thread.sleep(5000);
 
-		assertEquals(0, this.sessaoWatcher.getEncerradas().size());
+		assertEquals(1, this.sessaoWatcher.getEncerradas().size());
 
 		// This is pretty bare. What are some assertions YOU could write?
 	}

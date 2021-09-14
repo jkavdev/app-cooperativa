@@ -12,26 +12,24 @@ import org.springframework.amqp.rabbit.annotation.QueueBinding;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Component;
 
-import br.com.jkavdev.cooperativa.dominio.dto.SessaoModel;
-
 @Component
 public class SessaoWatcher {
 
 	private Logger logger = LoggerFactory.getLogger(SessaoWatcher.class);
 
-	private Set<SessaoModel> encerradas = new HashSet<>();
+	private Set<String> encerradas = new HashSet<>();
 
 	@RabbitListener(//
 			bindings = @QueueBinding(//
-					value = @Queue, //
-					exchange = @Exchange(value = "sessoes", type = ExchangeTypes.TOPIC), //
-					key = "*"))
-	public void listenSessoes(SessaoModel sessao) {
-		logger.info(sessao.toString());
+					value = @Queue(value = RabbitMQConfig.QUEUE_NAME), //
+					exchange = @Exchange(value = RabbitMQConfig.EXCHANGE_NAME, type = ExchangeTypes.TOPIC), //
+					key = RabbitMQConfig.ROUNTING_KEY))
+	public void listenSessoes(String sessao) {
+		logger.info("sessao finalizada " + sessao);
 		encerradas.add(sessao);
 	}
 
-	public Set<SessaoModel> getEncerradas() {
+	public Set<String> getEncerradas() {
 		return encerradas;
 	}
 

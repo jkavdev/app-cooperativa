@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
@@ -21,8 +22,12 @@ public interface SessaoRepository extends JpaRepository<Sessao, Long> {
 			+ "FROM Sessao s "
 			+ "JOIN s.votos v "
 			+ "JOIN s.pauta p "
-			+ "WHERE s.fim < CURRENT_TIMESTAMP "
+			+ "WHERE s.fim < CURRENT_TIMESTAMP AND s.status = null "
 			+ "GROUP BY s.id ")
 	public List<SessaoModel> sessoesEncerradas();
+	
+	@Modifying
+	@Query(value = "UPDATE sessao set status='FINALIZADA' WHERE id IN :ids", nativeQuery = true)
+	public void encerrarSessoes(List<Long> ids);
 
 } 
