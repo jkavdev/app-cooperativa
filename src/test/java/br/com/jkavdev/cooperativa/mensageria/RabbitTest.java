@@ -22,7 +22,6 @@ public class RabbitTest {
 	static RabbitMQContainer container = new RabbitMQContainer(
 			DockerImageName.parse("rabbitmq").withTag("3.7.25-management-alpine"));
 
-	// Grab Testcontainers info and inject it into Spring Boot
 	@DynamicPropertySource
 	static void configure(DynamicPropertyRegistry registry) {
 		registry.add("spring.rabbitmq.host", container::getContainerIpAddress);
@@ -34,11 +33,8 @@ public class RabbitTest {
 
 	@Test
 	void rabbitTest() throws InterruptedException {
-		// Give the test time to send some messages.
-		Thread.sleep(5000);
+		Thread.sleep(12000);
 
 		assertEquals(1, this.sessaoWatcher.getEncerradas().size());
-
-		// This is pretty bare. What are some assertions YOU could write?
 	}
 }

@@ -3,8 +3,6 @@ package br.com.jkavdev.cooperativa.mensageria;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.EnableScheduling;
@@ -18,8 +16,6 @@ import br.com.jkavdev.cooperativa.dominio.repositorio.SessaoRepository;
 @Service
 @EnableScheduling
 public class SessaoVerificadorService {
-
-	private Logger logger = LoggerFactory.getLogger(SessaoVerificadorService.class);
 
 	@Autowired
 	private SessaoRepository sessaoRepository;
