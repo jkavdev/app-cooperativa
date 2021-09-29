@@ -1,5 +1,7 @@
 package br.com.jkavdev.cooperativa.externo;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -19,8 +21,10 @@ public class CpfVerificador {
 
 	public StatusUsuario getStatus(String cpf) {
 		try {
-			String URL = urlVerificador + cpf;
-			StatusModel resp = restTemplate.getForObject(URL, StatusModel.class);
+			String url = urlVerificador + cpf;
+			StatusModel resp = Optional.ofNullable(restTemplate.getForObject(url, StatusModel.class))
+					.orElseThrow(() -> new NegocioException("erro ao consultar cpf"));
+
 			return resp.getStatus();
 		} catch (HttpClientErrorException e) {
 			if (404 == e.getRawStatusCode()) {

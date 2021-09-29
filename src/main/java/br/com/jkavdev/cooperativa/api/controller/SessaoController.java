@@ -56,7 +56,7 @@ public class SessaoController {
 		sessaoService.votar(sessaoId, input.getCpf(), input.getVoto());
 	}
 
-	@GetMapping("/{sessaoId}")
+	@GetMapping(value = "/{sessaoId}", headers = { "Accept=application/vnd.v1+json" })
 	public SessaoModel resumo(@PathVariable Long sessaoId) {
 		Sessao sessao = sessaoService.resumo(sessaoId);
 

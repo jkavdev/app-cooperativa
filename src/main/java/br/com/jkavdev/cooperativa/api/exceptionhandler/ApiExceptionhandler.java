@@ -10,6 +10,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -30,14 +31,17 @@ public class ApiExceptionhandler extends ResponseEntityExceptionHandler {
 	protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
 			HttpHeaders headers, HttpStatus status, WebRequest request) {
 
-		List<Campo> campos = ex.getBindingResult().getAllErrors().stream().map(error -> {
-			return new ErroRequisicao.Campo(((FieldError) error).getField(),
-					messageSource.getMessage(error, LocaleContextHolder.getLocale()));
-		}).collect(Collectors.toList());
+		List<Campo> campos = ex.getBindingResult().getAllErrors().stream().map(this::campo)
+				.collect(Collectors.toList());
 
 		ErroRequisicao erro = new ErroRequisicao(status.value(), "campo(s) inválido(s)!", campos);
 
 		return handleExceptionInternal(ex, erro, headers, status, request);
+	}
+
+	private Campo campo(ObjectError error) {
+		return new ErroRequisicao.Campo(((FieldError) error).getField(),
+				messageSource.getMessage(error, LocaleContextHolder.getLocale()));
 	}
 
 	@ExceptionHandler(NegocioException.class)

@@ -28,13 +28,12 @@ public class SessaoVerificadorService {
 	public void verificarSessoes() {
 		List<SessaoModel> sessoes = this.sessaoRepository.sessoesEncerradas();
 
-		if (sessoes.size() == 0) {
+		if (sessoes.isEmpty()) {
 			return;
 		}
 
-		sessoes.stream().forEach(s -> {
-			amqpTemplate.convertAndSend(RabbitMQConfig.EXCHANGE_NAME, RabbitMQConfig.ROUNTING_KEY, s.toString());
-		});
+		sessoes.stream().forEach(s -> amqpTemplate.convertAndSend(RabbitMQConfig.EXCHANGE_NAME,
+				RabbitMQConfig.ROUNTING_KEY, s.toString()));
 
 		sessaoRepository.encerrarSessoes(sessoes.stream().map(SessaoModel::getId).collect(Collectors.toList()));
 	}

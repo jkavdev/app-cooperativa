@@ -1,5 +1,6 @@
 package br.com.jkavdev.cooperativa.dominio.service;
 
+import java.time.Duration;
 import java.time.OffsetDateTime;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,7 +47,7 @@ public class SessaoService {
 		OffsetDateTime agora = OffsetDateTime.now();
 
 		sessao.setInicio(agora);
-		sessao.setFim(duracao != null ? agora.plusMinutes(duracao) : agora.plusMinutes(1));
+		sessao.setFim(duracao != null ? agora.plus(Duration.ofMillis(duracao)) : agora.plusMinutes(1));
 		sessao.setPauta(pauta);
 
 		return sessaoRepository.save(sessao);
