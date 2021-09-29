@@ -10,7 +10,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import br.com.jkavdev.cooperativa.dominio.dto.SessaoModel;
+import br.com.jkavdev.cooperativa.dominio.dto.ResumoSessao;
 import br.com.jkavdev.cooperativa.dominio.repositorio.SessaoRepository;
 
 @Service
@@ -26,7 +26,7 @@ public class SessaoVerificadorService {
 	@Transactional
 	@Scheduled(fixedRate = 10000L)
 	public void verificarSessoes() {
-		List<SessaoModel> sessoes = this.sessaoRepository.sessoesEncerradas();
+		List<ResumoSessao> sessoes = this.sessaoRepository.sessoesEncerradas();
 
 		if (sessoes.isEmpty()) {
 			return;
@@ -35,7 +35,7 @@ public class SessaoVerificadorService {
 		sessoes.stream().forEach(s -> amqpTemplate.convertAndSend(RabbitMQConfig.EXCHANGE_NAME,
 				RabbitMQConfig.ROUNTING_KEY, s.toString()));
 
-		sessaoRepository.encerrarSessoes(sessoes.stream().map(SessaoModel::getId).collect(Collectors.toList()));
+		sessaoRepository.encerrarSessoes(sessoes.stream().map(ResumoSessao::getId).collect(Collectors.toList()));
 	}
 
 }

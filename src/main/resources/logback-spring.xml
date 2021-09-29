@@ -27,21 +27,24 @@
         </rollingPolicy>
     </appender>
     
-    <logger name="br.com.jkavdev.cooperativa" level="error">
+    <logger name="br.com.jkavdev.cooperativa" level="ERROR">
         <appender-ref ref="RollingFile" />
     </logger>
     
-    <root level="info">
+<!--     additivity="false" evitar duplicacao de logs-->
+    <logger name="org.springframework.amqp" level="DEBUG" additivity="false">
+        <appender-ref ref="CONSOLE" />
+    </logger>
+    <logger name="org.hibernate.SQL" level="DEBUG" additivity="false">
+        <appender-ref ref="CONSOLE" />
+    </logger>
+    <logger name="org.hibernate.type.descriptor.sql" level="TRACE" additivity="false">
+        <appender-ref ref="CONSOLE" />
+    </logger>
+    
+    <root level="INFO">
 		<appender-ref ref="CONSOLE" />
 	</root>
-    <logger name="org.springframework.amqp" level="debug">
-        <appender-ref ref="CONSOLE" />
-    </logger>
-    <logger name="org.hibernate.SQL" level="debug">
-        <appender-ref ref="CONSOLE" />
-    </logger>
-    <logger name="org.hibernate.type.descriptor.sql" level="trace">
-        <appender-ref ref="CONSOLE" />
-    </logger>
+    
 
 </configuration>

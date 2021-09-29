@@ -14,7 +14,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class SessaoModel implements Serializable {
+public class ResumoSessao implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -33,8 +33,8 @@ public class SessaoModel implements Serializable {
 	public String toString() {
 		return "Pauta " + descricao 
 				+ ", iniciada as " + inicio 
-				+ ", encerrada as " + fim 
-				+ " com " + qtdeVotos + " votos";
+				+ ", encerrando-se as " + fim 
+				+ " com " + qtdeVotos + " voto(s)";
 	}
 
 }

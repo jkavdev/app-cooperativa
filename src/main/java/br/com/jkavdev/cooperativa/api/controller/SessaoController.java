@@ -1,6 +1,5 @@
 package br.com.jkavdev.cooperativa.api.controller;
 
-import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -25,7 +24,6 @@ import br.com.jkavdev.cooperativa.api.model.SessaoModel;
 import br.com.jkavdev.cooperativa.api.model.VotoModel;
 import br.com.jkavdev.cooperativa.dominio.modelo.Sessao;
 import br.com.jkavdev.cooperativa.dominio.modelo.Voto;
-import br.com.jkavdev.cooperativa.dominio.repositorio.SessaoRepository;
 import br.com.jkavdev.cooperativa.dominio.service.SessaoService;
 
 @RestController
@@ -34,9 +32,6 @@ public class SessaoController {
 
 	@PersistenceContext
 	private EntityManager entityManager;
-
-	@Autowired
-	private SessaoRepository sessaoRepository;
 
 	@Autowired
 	private SessaoService sessaoService;
@@ -71,11 +66,6 @@ public class SessaoController {
 		model.setVotos(voto);
 
 		return model;
-	}
-
-	@GetMapping
-	public List<br.com.jkavdev.cooperativa.dominio.dto.SessaoModel> sessoes() {
-		return sessaoRepository.sessoesEncerradas();
 	}
 
 }
