@@ -32,9 +32,6 @@
     </logger>
     
 <!--     additivity="false" evitar duplicacao de logs-->
-    <logger name="org.springframework.amqp" level="DEBUG" additivity="false">
-        <appender-ref ref="CONSOLE" />
-    </logger>
     <logger name="org.hibernate.SQL" level="DEBUG" additivity="false">
         <appender-ref ref="CONSOLE" />
     </logger>
