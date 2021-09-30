@@ -2,7 +2,6 @@ package br.com.jkavdev.cooperativa.mensageria;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ContextConfiguration;
@@ -31,7 +30,7 @@ public class RabbitTest {
 	@Autowired
 	SessaoWatcher sessaoWatcher;
 
-	@Test
+//	@Test verificar como montar esse teste, depois que o consumidor foi separado do produtor
 	void rabbitTest() throws InterruptedException {
 		Thread.sleep(12000);
 
